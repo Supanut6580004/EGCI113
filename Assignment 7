@@ -1,0 +1,66 @@
+#include <stdio.h>
+
+void print_menu();
+long fact(int);
+int nCr(int, int);
+int sum(int);
+
+int main(int argc, const char *argv[]) {
+    int menu;
+    int n, r;
+    do {
+        print_menu();
+        scanf("%d", &menu);
+        if (menu >= 1 && menu <= 3) {
+            printf("Input your number(n): ");
+            scanf("%d", &n);
+        }
+        switch (menu) {
+            case 1:
+                printf("Your factorial(n!) is %ld\n", fact(n)); // Use %ld for long integers
+                break;
+            case 2:
+                printf("Input your 'r': ");
+                scanf("%d", &r);
+                printf("Your %dC%d is %d\n", n, r, nCr(n, r));
+                break;
+            case 3:
+                printf("Your summation(Sum(n)) is %d\n", sum(n));
+                break;
+            default:
+                break;
+        }
+    } while (menu != 4);
+    return 0;
+}
+
+void print_menu() {
+    printf("Your choices?\n");
+}
+
+long fact(int n) {
+    long f = 1;
+    for (; n >= 1; n--) {
+        f *= n;
+    }
+    return f;
+}
+
+int nCr(int n, int r) {
+    if (r < 0 || r > n) {
+        return 0;
+    }
+
+    long numerator = fact(n);
+    long denominator = fact(r) * fact(n - r);
+
+    return (int)(numerator / denominator);
+}
+
+int sum(int x) {
+    int s = 0;
+    for (; x > 0; x--) {
+        s += x;
+    }
+    return s;
+}
